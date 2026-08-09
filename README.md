@@ -52,6 +52,7 @@ La descripción detallada del modelo, los algoritmos y el procedimiento de valid
 | 📅 [**WEEKLY.md**](docs/WEEKLY.md) | Planificación semanal, cargas flexibles y gestión térmica |
 | 🧪 [**VALIDATION.md**](docs/VALIDATION.md) | Metodología de validación experimental |
 | 🏗️ [**ARCHITECTURE.md**](docs/ARCHITECTURE.md) | Arquitectura software y evolución hacia control real |
+| ⚙️ [**INSTALLATION.md**](docs/INSTALLATION.md) | Instalación, APIs, credenciales y puesta en marcha |
 
 ---
 
