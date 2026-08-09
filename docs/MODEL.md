@@ -79,10 +79,12 @@ procedente de PVGIS con la predicción meteorológica de AEMET.
 
 Para cada hora $h$, se define una irradiancia prevista:
 
-$$
+
+```math
 G_h^{pred} =
 G_h^{PVGIS}\,F_h^{met}
-$$
+```
+
 
 donde:
 
@@ -100,13 +102,15 @@ La potencia de un panel depende de la temperatura de sus células.
 
 De forma simplificada:
 
-$$
+
+```math
 T_{cell,h}
 =
 T_{amb,h}
 +
 \Delta T(G_h,v_h)
-$$
+```
+
 
 donde:
 
@@ -123,7 +127,8 @@ refrigeración producida por el viento.
 
 La potencia fotovoltaica DC puede aproximarse mediante:
 
-$$
+
+```math
 P_{DC,h}
 =
 P_{STC}
@@ -132,7 +137,8 @@ P_{STC}
 1+\gamma
 (T_{cell,h}-25)
 \right]
-$$
+```
+
 
 donde:
 
@@ -151,7 +157,8 @@ Por tanto, temperaturas elevadas reducen la potencia disponible.
 
 La potencia AC no puede superar la potencia nominal del inversor:
 
-$$
+
+```math
 P_{FV,h}
 =
 \min
@@ -159,7 +166,8 @@ P_{FV,h}
 P_{AC,h},
 P_{inv,max}
 \right)
-$$
+```
+
 
 Esto permite representar el *clipping* del inversor cuando la potencia
 disponible del campo fotovoltaico supera su capacidad.
@@ -170,27 +178,33 @@ disponible del campo fotovoltaico supera su capacidad.
 
 Con intervalos horarios:
 
-$$
+
+```math
 E_{FV}
 =
 \sum_{h=0}^{23}
 P_{FV,h}\Delta t
-$$
+```
+
 
 con:
 
-$$
+
+```math
 \Delta t = 1\ \mathrm{h}
-$$
+```
+
 
 por lo que:
 
-$$
+
+```math
 E_{FV}
 =
 \sum_{h=0}^{23}
 P_{FV,h}
-$$
+```
+
 
 cuando la potencia se expresa en kW y el intervalo es exactamente una hora.
 
@@ -200,13 +214,15 @@ cuando la potencia se expresa en kW y el intervalo es exactamente una hora.
 
 La demanda total se construye a partir de las diferentes cargas domésticas:
 
-$$
+
+```math
 P_D(h)
 =
 P_{base}(h)
 +
 \sum_i P_i(h)
-$$
+```
+
 
 Las cargas se clasifican según su capacidad de gestión.
 
@@ -255,41 +271,51 @@ Ejemplo:
 
 Para cada hora:
 
-$$
+
+```math
 B_h
 =
 P_{FV,h}
 -
 P_{D,h}
-$$
+```
+
 
 Si:
 
-$$
+
+```math
 B_h>0
-$$
+```
+
 
 existe excedente fotovoltaico:
 
-$$
+
+```math
 E_{exc,h}
 =
 \max(B_h,0)
-$$
+```
+
 
 Si:
 
-$$
+
+```math
 B_h<0
-$$
+```
+
 
 existe déficit:
 
-$$
+
+```math
 E_{def,h}
 =
 \max(-B_h,0)
-$$
+```
+
 
 ---
 
@@ -297,7 +323,8 @@ $$
 
 La energía fotovoltaica utilizada directamente es:
 
-$$
+
+```math
 E_{auto,h}
 =
 \min
@@ -305,33 +332,40 @@ E_{auto,h}
 E_{FV,h},
 E_{D,h}
 \right)
-$$
+```
+
 
 y diariamente:
 
-$$
+
+```math
 E_{auto}
 =
 \sum_h E_{auto,h}
-$$
+```
+
 
 El ratio de autoconsumo puede definirse como:
 
-$$
+
+```math
 R_{auto}
 =
 \frac{E_{auto}}
 {E_{FV}}
-$$
+```
+
 
 mientras que la autosuficiencia energética directa es:
 
-$$
+
+```math
 R_{self}
 =
 \frac{E_{auto}}
 {E_D}
-$$
+```
+
 
 Estas dos magnitudes representan conceptos diferentes.
 
@@ -341,11 +375,13 @@ Estas dos magnitudes representan conceptos diferentes.
 
 La batería se representa mediante su estado de carga:
 
-$$
+
+```math
 SOC_h =
 \frac{E_{bat,h}}
 {E_{nom}}
-$$
+```
+
 
 donde:
 
@@ -354,7 +390,8 @@ donde:
 
 La evolución temporal puede expresarse como:
 
-$$
+
+```math
 E_{bat,h+1}
 =
 E_{bat,h}
@@ -362,7 +399,8 @@ E_{bat,h}
 \eta_c E_{carga,h}
 -
 \frac{E_{descarga,h}}{\eta_d}
-$$
+```
+
 
 donde:
 
@@ -377,22 +415,26 @@ No se utiliza necesariamente toda la capacidad nominal.
 
 Se define:
 
-$$
+
+```math
 SOC_{min}
 \leq
 SOC_h
 \leq
 SOC_{max}
-$$
+```
+
 
 La energía utilizable dentro de esta ventana es:
 
-$$
+
+```math
 E_{usable}
 =
 E_{nom}
 (SOC_{max}-SOC_{min})
-$$
+```
+
 
 Esta restricción protege la batería frente a profundidades de descarga
 innecesarias.
@@ -403,17 +445,20 @@ innecesarias.
 
 Una métrica importante es la energía total ciclada:
 
-$$
+
+```math
 E_{cycle}
 =
 E_{charge}
 +
 E_{discharge}
-$$
+```
+
 
 Una aproximación a los ciclos completos equivalentes es:
 
-$$
+
+```math
 N_{eq}
 =
 \frac{
@@ -421,7 +466,8 @@ E_{charge}+E_{discharge}
 }{
 2E_{nom}
 }
-$$
+```
+
 
 Esta variable permite introducir explícitamente el desgaste de la batería en
 la estrategia de control.
@@ -432,22 +478,26 @@ la estrategia de control.
 
 Para cada hora:
 
-$$
+
+```math
 C_h
 =
 E_{grid,h}^{buy}
 p_h^{buy}
-$$
+```
+
 
 El coste diario es:
 
-$$
+
+```math
 C_{grid}
 =
 \sum_h
 E_{grid,h}^{buy}
 p_h^{buy}
-$$
+```
+
 
 ---
 
@@ -455,30 +505,36 @@ $$
 
 La energía exportada genera:
 
-$$
+
+```math
 I_h
 =
 E_{grid,h}^{sell}
 p_h^{sell}
-$$
+```
+
 
 y:
 
-$$
+
+```math
 I_{grid}
 =
 \sum_h I_h
-$$
+```
+
 
 El balance económico neto es:
 
-$$
+
+```math
 C_{net}
 =
 C_{grid}
 -
 I_{grid}
-$$
+```
+
 
 ---
 
@@ -490,25 +546,29 @@ Cada ciclo produce degradación.
 
 Puede introducirse un coste equivalente:
 
-$$
+
+```math
 C_{bat}
 =
 c_{deg}
 E_{throughput}
-$$
+```
+
 
 donde $c_{deg}$ representa el coste estimado de degradación por unidad de
 energía procesada.
 
 Esto conduce a una regla importante:
 
-$$
+
+```math
 \text{descargar batería}
 \quad\text{solo si}\quad
 V_{energia}
 >
 C_{degradacion}
-$$
+```
+
 
 Por tanto, comprar una pequeña cantidad de electricidad barata puede ser
 preferible a realizar un ciclo de batería de escaso valor.
@@ -521,7 +581,8 @@ El algoritmo no utiliza únicamente límites fijos.
 
 Puede establecer un SOC objetivo dependiente del futuro:
 
-$$
+
+```math
 SOC_h^{obj}
 =
 f
@@ -532,7 +593,8 @@ p^{future},
 SOC_{min},
 SOC_{max}
 \right)
-$$
+```
+
 
 Si se espera elevada producción solar, no es necesario conservar una batería
 excesivamente cargada.
@@ -550,18 +612,21 @@ reactiva.
 Para una carga flexible $i$, el problema consiste en determinar el instante
 de inicio:
 
-$$
+
+```math
 t_i^*
 =
 \arg\max_t
 S_i(t)
-$$
+```
+
 
 donde $S_i(t)$ es una función de conveniencia.
 
 Conceptualmente puede depender de:
 
-$$
+
+```math
 S_i(t)
 =
 w_s S_{solar}
@@ -571,7 +636,8 @@ w_p S_{precio}
 w_b S_{bateria}
 +
 w_u S_{usuario}
-$$
+```
+
 
 con pesos configurables.
 
@@ -592,25 +658,29 @@ necesidad de climatización.
 
 Puede representarse mediante:
 
-$$
+
+```math
 u_{cool}(t)
 =
 \begin{cases}
 1, & T(t) > T_{cool}\\
 0, & T(t) \leq T_{cool}
 \end{cases}
-$$
+```
+
 
 y para calefacción:
 
-$$
+
+```math
 u_{heat}(t)
 =
 \begin{cases}
 1, & T(t) < T_{heat}\\
 0, & T(t) \geq T_{heat}
 \end{cases}
-$$
+```
+
 
 donde $u(t)$ representa la recomendación de activación.
 
@@ -624,9 +694,11 @@ El modelo utiliza dos resoluciones meteorológicas.
 
 Cuando existe predicción horaria AEMET:
 
-$$
+
+```math
 T=T(h)
-$$
+```
+
 
 y las decisiones térmicas pueden realizarse hora a hora.
 
@@ -634,13 +706,15 @@ y las decisiones térmicas pueden realizarse hora a hora.
 
 Cuando únicamente existe predicción diaria:
 
-$$
+
+```math
 T \approx
 \left(
 T_{min},
 T_{max}
 \right)
-$$
+```
+
 
 La incertidumbre aumenta con el horizonte temporal.
 
@@ -690,13 +764,16 @@ y de la estrategia seleccionada.
 
 El problema completo puede formularse como una optimización multiobjetivo:
 
-$$
+
+```math
 \min J
-$$
+```
+
 
 con:
 
-$$
+
+```math
 J =
 C_{grid}
 -
@@ -709,7 +786,8 @@ C_{battery}
 \lambda_2 P_{discomfort}
 +
 \lambda_3 P_{constraints}
-$$
+```
+
 
 donde:
 
@@ -741,7 +819,8 @@ El objetivo no es maximizar de forma absoluta el beneficio económico diario.
 
 El objetivo es obtener un compromiso entre:
 
-$$
+
+```math
 \boxed{
 \text{coste}
 +
@@ -753,7 +832,8 @@ $$
 +
 \text{sostenibilidad}
 }
-$$
+```
+
 
 ---
 
@@ -761,9 +841,11 @@ $$
 
 Para cada día $d$ se construye un indicador solar:
 
-$$
+
+```math
 S_d \in [0,1]
-$$
+```
+
 
 A partir de:
 
@@ -855,7 +937,8 @@ instalación.
 
 Idealmente:
 
-$$
+
+```math
 \{
 P_{FV},
 P_{load},
@@ -867,25 +950,30 @@ G,
 p_{buy},
 p_{sell}
 \}
-$$
+```
+
 
 con resolución temporal conocida.
 
 Esto permitirá comparar:
 
-$$
+
+```math
 P_{FV}^{predicho}(t)
 \quad\text{vs.}\quad
 P_{FV}^{medido}(t)
-$$
+```
+
 
 y:
 
-$$
+
+```math
 E_{grid}^{predicho}
 \quad\text{vs.}\quad
 E_{grid}^{medido}
-$$
+```
+
 
 ---
 
@@ -895,27 +983,32 @@ Para la predicción fotovoltaica pueden utilizarse métricas como:
 
 ## MAE
 
-$$
+
+```math
 MAE =
 \frac{1}{N}
 \sum_{i=1}^{N}
 |P_i-\hat P_i|
-$$
+```
+
 
 ## RMSE
 
-$$
+
+```math
 RMSE =
 \sqrt{
 \frac{1}{N}
 \sum_{i=1}^{N}
 (P_i-\hat P_i)^2
 }
-$$
+```
+
 
 ## Error energético diario
 
-$$
+
+```math
 \epsilon_E
 =
 \frac{
@@ -923,7 +1016,8 @@ E_{pred}-E_{real}
 }{
 E_{real}
 }
-$$
+```
+
 
 También deberían evaluarse:
 
@@ -986,40 +1080,49 @@ En cada instante:
 
 Matemáticamente:
 
-$$
+
+```math
 \mathbf{u}^{*}
 =
 \arg\min_{\mathbf{u}}
 J(\mathbf{x},\mathbf{u})
-$$
+```
+
 
 sujeto a:
 
-$$
+
+```math
 SOC_{min}
 \leq SOC(t)
 \leq SOC_{max}
-$$
+```
 
-$$
+
+
+```math
 0
 \leq
 P_{charge}(t)
 \leq
 P_{charge,max}
-$$
+```
 
-$$
+
+
+```math
 0
 \leq
 P_{discharge}(t)
 \leq
 P_{discharge,max}
-$$
+```
+
 
 y al balance:
 
-$$
+
+```math
 P_{FV}
 +
 P_{grid}^{buy}
@@ -1031,7 +1134,8 @@ P_D
 P_{battery}^{charge}
 +
 P_{grid}^{sell}
-$$
+```
+
 
 ---
 
@@ -1042,7 +1146,8 @@ fotovoltaica.
 
 La cuestión principal es estudiar si la combinación de:
 
-$$
+
+```math
 \boxed{
 \text{predicción meteorológica}
 +
@@ -1054,7 +1159,8 @@ $$
 +
 \text{almacenamiento}
 }
-$$
+```
+
 
 permite reducir simultáneamente:
 
