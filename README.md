@@ -17,9 +17,17 @@
 
 ## Qué es
 
-**Gestión Solar Predictiva** es un sistema experimental en Python para predecir, planificar y optimizar el uso de energía en una vivienda con instalación fotovoltaica, baterías, conexión a red, precios eléctricos horarios, cargas domésticas flexibles, climatización y solar térmica para ACS.
+**Gestión Solar Predictiva** es un sistema experimental en Python que convierte previsiones meteorológicas, referencias solares, precios eléctricos y un modelo de demanda doméstica en **decisiones energéticas horarias y semanales**.
 
-El proyecto combina datos meteorológicos de **AEMET**, referencias solares de **PVGIS**, precios de **ESIOS**, un modelo físico-predictivo de generación fotovoltaica y un algoritmo de despacho que decide, hora a hora, cómo repartir la energía entre autoconsumo, batería, compra y venta.
+El objetivo no es limitarse a estimar cuánta energía producirán los paneles. El sistema intenta responder dos preguntas operativas:
+
+> **¿Qué debe hacer la instalación en cada hora?**  
+> Autoconsumir, cargar batería, descargarla, comprar energía o exportar excedentes.
+>
+> **¿Cuándo conviene prestar cada servicio durante la semana?**  
+> Desplazar cargas, climatizar, producir ACS, regar o aprovechar alternativas solares.
+
+Para ello combina datos meteorológicos de **AEMET**, referencias solares de **PVGIS**, precios de **ESIOS**, un modelo físico-predictivo de generación fotovoltaica, demanda flexible y un algoritmo de despacho con criterios energéticos, económicos y de conservación de batería.
 
 La filosofía del sistema no consiste únicamente en minimizar el coste eléctrico diario. También intenta:
 
@@ -30,9 +38,6 @@ La filosofía del sistema no consiste únicamente en minimizar el coste eléctri
 - aprovechar almacenamiento térmico;
 - anticipar decisiones mediante previsión meteorológica;
 - coordinar decisiones diarias con una planificación semanal.
-
-> **Pregunta diaria:** ¿de dónde debe proceder la energía en cada hora?  
-> **Pregunta semanal:** ¿cuándo conviene prestar cada servicio?
 
 ---
 
@@ -114,6 +119,37 @@ Estos valores corresponden únicamente a la instalación de referencia. La confi
 
 ---
 
+## Flujo de decisión
+
+```text
+AEMET + PVGIS + ESIOS
+          │
+          ▼
+ Predicción meteorológica
+          │
+          ▼
+ Modelo físico FV ──────► Perfil de demanda
+          │                    │
+          └────────┬───────────┘
+                   ▼
+             Balance horario
+                   │
+                   ▼
+        Despacho batería / red
+                   │
+          ┌────────┴────────┐
+          ▼                 ▼
+     Plan diario       Plan semanal
+          │                 │
+          └────────┬────────┘
+                   ▼
+        Recomendación operativa
+```
+
+La predicción se transforma así en una propuesta de operación reproducible, no únicamente en una estimación de generación.
+
+---
+
 ## Arquitectura
 
 ```mermaid
@@ -189,14 +225,16 @@ PVGIS proporciona la referencia solar y climatológica empleada para construir e
 
 Conceptualmente:
 
-\[
+
+```math
 G_{\mathrm{pred}}(t)
 =
 G_{\mathrm{PVGIS}}(t)\,
 F_{\mathrm{met}}(t)
-\]
+```
 
-donde \(F_{\mathrm{met}}\) representa la corrección meteorológica.
+
+donde $F_{\mathrm{met}}$ representa la corrección meteorológica.
 
 ### ESIOS
 
@@ -214,7 +252,8 @@ ESIOS proporciona la información económica utilizada para comparar:
 
 Una expresión simplificada de la potencia DC es:
 
-\[
+
+```math
 P_{\mathrm{DC}}
 =
 P_{\mathrm{STC}}
@@ -222,7 +261,8 @@ P_{\mathrm{STC}}
 \left[
 1+\gamma(T_{\mathrm{cell}}-25)
 \right]
-\]
+```
+
 
 La potencia AC queda posteriormente condicionada por rendimiento y límites del inversor.
 
@@ -240,13 +280,15 @@ La formulación se desarrolla en [**MODEL.md**](docs/MODEL.md).
 
 Para cada hora:
 
-\[
+
+```math
 P_{\mathrm{balance}}(t)
 =
 P_{\mathrm{FV}}(t)
 -
 P_{\mathrm{demanda}}(t)
-\]
+```
+
 
 Si el balance es positivo existe excedente potencial. Si es negativo existe un déficit que deberá cubrirse mediante batería, red o una combinación de ambas.
 
@@ -284,7 +326,8 @@ Acción
 
 El balance debe satisfacer:
 
-\[
+
+```math
 P_{\mathrm{FV}}
 +
 P_{\mathrm{buy}}
@@ -296,7 +339,8 @@ P_{\mathrm{load}}
 P_{\mathrm{ch}}
 +
 P_{\mathrm{sell}}
-\]
+```
+
 
 La batería opera dentro de límites de SOC y la estrategia penaliza el ciclado innecesario.
 
@@ -581,11 +625,13 @@ precio de venta
 
 El objetivo es comparar:
 
-\[
+
+```math
 \text{predicción}
 \quad\text{vs.}\quad
 \text{medida real}
-\]
+```
+
 
 y evaluar:
 
