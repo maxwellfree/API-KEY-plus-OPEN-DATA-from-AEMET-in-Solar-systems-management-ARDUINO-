@@ -243,9 +243,11 @@ Este módulo proporciona la versión horaria de la predicción.
 
 Su horizonte es aproximadamente:
 
-\[
+
+```math
 48\ \mathrm{h}
-\]
+```
+
 
 y puede proporcionar:
 
@@ -311,7 +313,8 @@ perfil FV horario
 
 Conceptualmente:
 
-\[
+
+```math
 P_{FV}(h)
 =
 f
@@ -323,7 +326,8 @@ T_{cell},
 P_{STC},
 P_{inv}
 \right)
-\]
+```
+
 
 ---
 
@@ -408,13 +412,15 @@ precios
 
 Para cada hora:
 
-\[
+
+```math
 B_h
 =
 P_{FV,h}
 -
 P_{D,h}
-\]
+```
+
 
 y calcula:
 
@@ -1187,11 +1193,13 @@ timestamp
 
 y una edad máxima permitida:
 
-\[
+
+```math
 t_{now}-t_{data}
 <
 \Delta t_{max}
-\]
+```
+
 
 Si no se cumple:
 
@@ -1375,7 +1383,8 @@ y comprobar que la acción obtenida es físicamente coherente.
 
 Todo despacho debería satisfacer:
 
-\[
+
+```math
 P_{FV}
 +
 P_{buy}
@@ -1388,7 +1397,8 @@ P_{ch}
 -
 P_{sell}
 \approx0
-\]
+```
+
 
 Este test debe automatizarse.
 
@@ -1398,11 +1408,13 @@ Este test debe automatizarse.
 
 Debe cumplirse siempre:
 
-\[
+
+```math
 SOC_{min}
 \leq SOC
 \leq SOC_{max}
-\]
+```
+
 
 ---
 
@@ -1410,17 +1422,21 @@ SOC_{min}
 
 También:
 
-\[
+
+```math
 P_{charge}
 \leq
 P_{charge,max}
-\]
+```
 
-\[
+
+
+```math
 P_{discharge}
 \leq
 P_{discharge,max}
-\]
+```
+
 
 ---
 
@@ -1428,15 +1444,19 @@ P_{discharge,max}
 
 Idealmente:
 
-\[
+
+```math
 P_{buy}P_{sell}=0
-\]
+```
+
 
 y:
 
-\[
+
+```math
 P_{charge}P_{discharge}=0
-\]
+```
+
 
 ---
 
@@ -1647,7 +1667,8 @@ repetir
 
 Una futura variable de estado podría ser:
 
-\[
+
+```math
 \mathbf{x}
 =
 [
@@ -1656,13 +1677,15 @@ T_{in},
 T_{ACS},
 P_{load}
 ]
-\]
+```
+
 
 ---
 
 # 77. Variables de control
 
-\[
+
+```math
 \mathbf{u}
 =
 [
@@ -1671,13 +1694,15 @@ P_{grid},
 P_{HVAC},
 P_{ACS}
 ]
-\]
+```
+
 
 ---
 
 # 78. Variables exógenas
 
-\[
+
+```math
 \mathbf{w}
 =
 [
@@ -1687,7 +1712,8 @@ p_{buy},
 p_{sell},
 ocupacion
 ]
-\]
+```
+
 
 ---
 
@@ -2026,15 +2052,18 @@ La siguiente ampliación recomendable es:
 
 La arquitectura pretende evolucionar hacia:
 
-\[
+
+```math
 \boxed{
 \text{HEMS predictivo}
 }
-\]
+```
+
 
 capaz de integrar:
 
-\[
+
+```math
 \boxed{
 \text{meteorología}
 +
@@ -2050,7 +2079,8 @@ capaz de integrar:
 +
 \text{control}
 }
-\]
+```
+
 
 manteniendo una separación clara entre:
 

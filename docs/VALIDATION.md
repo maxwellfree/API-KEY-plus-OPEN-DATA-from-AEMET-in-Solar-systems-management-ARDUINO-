@@ -27,47 +27,65 @@ contrastada.
 
 El sistema genera predicciones:
 
-\[
+
+```math
 \hat P_{FV}(t)
-\]
+```
 
-\[
+
+
+```math
 \hat P_D(t)
-\]
+```
 
-\[
+
+
+```math
 \widehat{SOC}(t)
-\]
+```
 
-\[
+
+
+```math
 \hat P_{grid}(t)
-\]
+```
+
 
 que deben compararse con medidas reales:
 
-\[
+
+```math
 P_{FV}(t)
-\]
+```
 
-\[
+
+
+```math
 P_D(t)
-\]
+```
 
-\[
+
+
+```math
 SOC(t)
-\]
+```
 
-\[
+
+
+```math
 P_{grid}(t)
-\]
+```
+
 
 El objetivo es cuantificar:
 
-\[
+
+```math
 \text{predicción}
 \quad\text{vs.}\quad
 \text{experimento}
-\]
+```
+
 
 ---
 
@@ -110,9 +128,10 @@ También deben registrarse posibles condicionantes:
 
 # 3. Variables experimentales
 
-Idealmente, en cada instante \(t\) deben registrarse:
+Idealmente, en cada instante $t$ deben registrarse:
 
-\[
+
+```math
 \mathbf{x}(t)
 =
 \{
@@ -125,7 +144,8 @@ V_{battery},
 I_{battery},
 T_{battery}
 \}
-\]
+```
+
 
 Si el inversor proporciona más variables, también pueden almacenarse.
 
@@ -158,17 +178,21 @@ Esto evita introducir información futura en la validación.
 
 Para cada intervalo:
 
-\[
+
+```math
 p_{buy}(t)
-\]
+```
+
 
 precio de compra,
 
 y:
 
-\[
+
+```math
 p_{sell}(t)
-\]
+```
+
 
 precio de compensación/exportación.
 
@@ -230,18 +254,22 @@ La convención debe permanecer constante durante todo el estudio.
 
 Una resolución de:
 
-\[
+
+```math
 1-5\ \text{min}
-\]
+```
+
 
 sería adecuada para caracterización detallada.
 
 Para comparar con el modelo horario, los datos pueden posteriormente agregarse
 a:
 
-\[
+
+```math
 \Delta t=1\ \mathrm{h}
-\]
+```
+
 
 La adquisición original no debería limitarse directamente a una hora si el
 inversor permite mayor resolución.
@@ -252,22 +280,26 @@ inversor permite mayor resolución.
 
 A partir de medidas discretas:
 
-\[
+
+```math
 E
 =
 \sum_i
 P_i\Delta t
-\]
+```
+
 
 Si la frecuencia de medida no es uniforme, debe utilizarse:
 
-\[
+
+```math
 E
 =
 \sum_i
 P_i(t_i)
 (t_{i+1}-t_i)
-\]
+```
+
 
 ---
 
@@ -275,37 +307,45 @@ P_i(t_i)
 
 La primera validación consiste en comparar:
 
-\[
+
+```math
 \hat P_{FV}(t)
-\]
+```
+
 
 con:
 
-\[
+
+```math
 P_{FV}(t)
-\]
+```
+
 
 El error instantáneo es:
 
-\[
+
+```math
 e_{FV}(t)
 =
 P_{FV}(t)
 -
 \hat P_{FV}(t)
-\]
+```
+
 
 ---
 
 # 11. Error absoluto medio
 
-\[
+
+```math
 MAE
 =
 \frac{1}{N}
 \sum_{i=1}^{N}
 |P_i-\hat P_i|
-\]
+```
+
 
 El MAE mantiene las unidades de potencia.
 
@@ -319,7 +359,8 @@ MAE = 0.34 kW
 
 # 12. Error cuadrático medio
 
-\[
+
+```math
 RMSE
 =
 \sqrt{
@@ -327,7 +368,8 @@ RMSE
 \sum_{i=1}^{N}
 (P_i-\hat P_i)^2
 }
-\]
+```
+
 
 El RMSE penaliza especialmente los errores grandes.
 
@@ -337,12 +379,14 @@ El RMSE penaliza especialmente los errores grandes.
 
 Para comparar días con distinta producción puede utilizarse:
 
-\[
+
+```math
 nRMSE
 =
 \frac{RMSE}
 {P_{rated}}
-\]
+```
+
 
 o normalizar respecto a la potencia media o máxima observada.
 
@@ -354,7 +398,8 @@ La definición utilizada debe indicarse expresamente.
 
 El error porcentual absoluto medio es:
 
-\[
+
+```math
 MAPE
 =
 \frac{100}{N}
@@ -362,13 +407,16 @@ MAPE
 \left|
 \frac{P_i-\hat P_i}{P_i}
 \right|
-\]
+```
+
 
 Sin embargo, en generación FV presenta problemas cuando:
 
-\[
+
+```math
 P_i\approx0
-\]
+```
+
 
 por ejemplo al amanecer o anochecer.
 
@@ -380,7 +428,8 @@ Por ello no debería utilizarse como única métrica.
 
 Una métrica especialmente útil es:
 
-\[
+
+```math
 \epsilon_E
 =
 \frac{
@@ -390,11 +439,13 @@ E_{FV}
 }{
 E_{FV}
 }
-\]
+```
+
 
 en porcentaje:
 
-\[
+
+```math
 \epsilon_E[\%]
 =
 100
@@ -405,7 +456,8 @@ E_{FV}
 }{
 E_{FV}
 }
-\]
+```
+
 
 ---
 
@@ -413,13 +465,15 @@ E_{FV}
 
 El sesgo medio puede calcularse como:
 
-\[
+
+```math
 MBE
 =
 \frac{1}{N}
 \sum_i
 (\hat P_i-P_i)
-\]
+```
+
 
 Esto permite detectar una tendencia sistemática a:
 
@@ -452,17 +506,23 @@ variables.
 
 También debe separarse según horizonte:
 
-\[
+
+```math
 H=0-24\ \mathrm{h}
-\]
+```
 
-\[
+
+
+```math
 H=24-48\ \mathrm{h}
-\]
+```
 
-\[
+
+
+```math
 H>48\ \mathrm{h}
-\]
+```
+
 
 Esto permitirá cuantificar el valor de la estrategia multirresolución.
 
@@ -472,15 +532,19 @@ Esto permitirá cuantificar el valor de la estrategia multirresolución.
 
 Una comparación interesante es:
 
-\[
+
+```math
 MAE_{hourly}
-\]
+```
+
 
 frente a:
 
-\[
+
+```math
 MAE_{daily}
-\]
+```
+
 
 para comprobar si la información horaria mejora realmente la estimación FV.
 
@@ -490,31 +554,40 @@ para comprobar si la información horaria mejora realmente la estimación FV.
 
 La demanda prevista:
 
-\[
+
+```math
 \hat P_D(t)
-\]
+```
+
 
 debe compararse con:
 
-\[
+
+```math
 P_D(t)
-\]
+```
+
 
 real.
 
 Se pueden calcular:
 
-\[
-MAE_D
-\]
 
-\[
+```math
+MAE_D
+```
+
+
+
+```math
 RMSE_D
-\]
+```
+
 
 y error energético:
 
-\[
+
+```math
 \epsilon_{E,D}
 =
 \frac{
@@ -522,7 +595,8 @@ y error energético:
 }{
 E_D
 }
-\]
+```
+
 
 ---
 
@@ -556,37 +630,45 @@ La validación debería separar ambos tipos cuando sea posible.
 
 Debe compararse:
 
-\[
+
+```math
 \widehat{SOC}(t)
-\]
+```
+
 
 con:
 
-\[
+
+```math
 SOC(t)
-\]
+```
+
 
 real.
 
 El error:
 
-\[
+
+```math
 e_{SOC}(t)
 =
 SOC(t)
 -
 \widehat{SOC}(t)
-\]
+```
+
 
 Puede medirse mediante:
 
-\[
+
+```math
 MAE_{SOC}
 =
 \frac{1}{N}
 \sum_i
 |SOC_i-\widehat{SOC}_i|
-\]
+```
+
 
 expresado en puntos porcentuales.
 
@@ -598,9 +680,11 @@ Un error pequeño en eficiencia de batería puede producir deriva progresiva.
 
 Por ello debe observarse:
 
-\[
+
+```math
 \Delta SOC(t)
-\]
+```
+
 
 a lo largo de varios días.
 
@@ -618,15 +702,19 @@ necesitan recalibración.
 
 Se comparará:
 
-\[
+
+```math
 \hat P_{battery}(t)
-\]
+```
+
 
 con:
 
-\[
+
+```math
 P_{battery}(t)
-\]
+```
+
 
 si el sistema llega a ejecutar automáticamente las consignas.
 
@@ -693,16 +781,19 @@ sin predicción.
 
 Objetivo:
 
-\[
+
+```math
 \min
 (C_{buy}-I_{sell})
-\]
+```
+
 
 ## Estrategia C — sostenible predictiva
 
 Objetivo aproximado:
 
-\[
+
+```math
 \min
 (
 C_{buy}
@@ -711,7 +802,8 @@ I_{sell}
 +
 C_{deg}
 )
-\]
+```
+
 
 con criterios adicionales de confort y flexibilidad.
 
@@ -756,7 +848,8 @@ y comparar resultados sin necesidad de repetir físicamente el día.
 
 Para cada estrategia:
 
-\[
+
+```math
 C_{day}
 =
 \sum_h
@@ -764,23 +857,27 @@ E_{buy,h}p_{buy,h}
 -
 \sum_h
 E_{sell,h}p_{sell,h}
-\]
+```
+
 
 ---
 
 # 30. Ahorro respecto a referencia
 
-\[
+
+```math
 Saving
 =
 C_{reference}
 -
 C_{strategy}
-\]
+```
+
 
 y:
 
-\[
+
+```math
 Saving[\%]
 =
 100
@@ -791,35 +888,41 @@ C_{strategy}
 }{
 C_{reference}
 }
-\]
+```
+
 
 ---
 
 # 31. Energía importada
 
-\[
+
+```math
 E_{import}
 =
 \sum_h
 E_{grid,h}^{buy}
-\]
+```
+
 
 ---
 
 # 32. Energía exportada
 
-\[
+
+```math
 E_{export}
 =
 \sum_h
 E_{grid,h}^{sell}
-\]
+```
+
 
 ---
 
 # 33. Autoconsumo
 
-\[
+
+```math
 R_{auto}
 =
 \frac{
@@ -827,13 +930,15 @@ E_{FV,used}
 }{
 E_{FV,total}
 }
-\]
+```
+
 
 ---
 
 # 34. Autosuficiencia
 
-\[
+
+```math
 R_{self}
 =
 \frac{
@@ -841,7 +946,8 @@ E_{load}-E_{grid}^{buy}
 }{
 E_{load}
 }
-\]
+```
+
 
 ---
 
@@ -849,7 +955,8 @@ E_{load}
 
 Se calculará:
 
-\[
+
+```math
 N_{eq}
 =
 \frac{
@@ -859,7 +966,8 @@ E_{discharge}
 }{
 2E_{nom}
 }
-\]
+```
+
 
 Esta es una de las métricas principales del estudio.
 
@@ -869,17 +977,20 @@ Esta es una de las métricas principales del estudio.
 
 Respecto a la estrategia de referencia:
 
-\[
+
+```math
 \Delta N_{eq}
 =
 N_{eq}^{ref}
 -
 N_{eq}^{strategy}
-\]
+```
+
 
 Puede expresarse en porcentaje:
 
-\[
+
+```math
 R_{cycle}
 =
 100
@@ -890,7 +1001,8 @@ N_{eq}^{strategy}
 }{
 N_{eq}^{ref}
 }
-\]
+```
+
 
 ---
 
@@ -898,7 +1010,8 @@ N_{eq}^{ref}
 
 Una métrica interesante puede ser:
 
-\[
+
+```math
 V_{cycle}
 =
 \frac{
@@ -906,7 +1019,8 @@ V_{cycle}
 }{
 \Delta N_{eq}
 }
-\]
+```
+
 
 Esto permite estudiar cuánto coste económico se intercambia por reducción de
 desgaste.
@@ -931,7 +1045,8 @@ energía real
 
 Puede definirse:
 
-\[
+
+```math
 R_{accept}
 =
 \frac{
@@ -939,7 +1054,8 @@ N_{accepted}
 }{
 N_{recommended}
 }
-\]
+```
+
 
 Esto mide hasta qué punto el plan es compatible con la vida real del usuario.
 
@@ -947,15 +1063,18 @@ Esto mide hasta qué punto el plan es compatible con la vida real del usuario.
 
 # 40. Energía desplazada
 
-\[
+
+```math
 E_{shift}
 =
 \sum_i E_i^{shifted}
-\]
+```
+
 
 El porcentaje de flexibilidad utilizada:
 
-\[
+
+```math
 R_{shift}
 =
 \frac{
@@ -963,19 +1082,22 @@ E_{shift}
 }{
 E_{flex,total}
 }
-\]
+```
+
 
 ---
 
 # 41. Ganancia de autoconsumo por flexibilidad
 
-\[
+
+```math
 \Delta E_{auto}
 =
 E_{auto}^{flex}
 -
 E_{auto}^{base}
-\]
+```
+
 
 ---
 
@@ -986,13 +1108,15 @@ descarga de batería.
 
 Puede medirse:
 
-\[
+
+```math
 \Delta E_{battery}
 =
 E_{battery}^{base}
 -
 E_{battery}^{flex}
-\]
+```
+
 
 ---
 
@@ -1014,9 +1138,11 @@ potencia HVAC
 
 Cuando esté disponible:
 
-\[
+
+```math
 T_{in}(t)
-\]
+```
+
 
 permitirá evaluar si las recomendaciones mantienen el confort.
 
@@ -1026,13 +1152,15 @@ permitirá evaluar si las recomendaciones mantienen el confort.
 
 Puede definirse:
 
-\[
+
+```math
 e_T(t)
 =
 T_{set}
 -
 T_{in}(t)
-\]
+```
+
 
 ---
 
@@ -1040,7 +1168,8 @@ T_{in}(t)
 
 Una métrica sencilla:
 
-\[
+
+```math
 H_{discomfort}
 =
 \sum_t
@@ -1049,7 +1178,8 @@ H_{discomfort}
 |T_{in}(t)-T_{set}|>\Delta T
 \right)
 \Delta t
-\]
+```
+
 
 ---
 
@@ -1057,9 +1187,11 @@ H_{discomfort}
 
 Puede medirse:
 
-\[
+
+```math
 E_{HVAC}
-\]
+```
+
 
 consumida por climatización durante el día.
 
@@ -1079,9 +1211,11 @@ autoconsumo
 
 En una fase avanzada se registrará:
 
-\[
+
+```math
 T_{ACS}(t)
-\]
+```
+
 
 junto con:
 
@@ -1093,13 +1227,15 @@ junto con:
 
 # 49. Ahorro eléctrico de ACS
 
-\[
+
+```math
 E_{ACS,saved}
 =
 E_{ACS,reference}
 -
 E_{ACS,solar}
-\]
+```
+
 
 ---
 
@@ -1138,9 +1274,11 @@ Los valores extremos deben detectarse pero no eliminarse automáticamente.
 
 Por ejemplo:
 
-\[
+
+```math
 P_{FV}>P_{physical,max}
-\]
+```
+
 
 puede indicar:
 
@@ -1176,15 +1314,19 @@ El cambio verano/invierno debe tratarse cuidadosamente.
 
 Existen días con:
 
-\[
+
+```math
 23\ \mathrm{h}
-\]
+```
+
 
 y:
 
-\[
+
+```math
 25\ \mathrm{h}
-\]
+```
+
 
 No debe asumirse siempre que un día tiene exactamente 24 registros horarios.
 
@@ -1194,17 +1336,21 @@ No debe asumirse siempre que un día tiene exactamente 24 registros horarios.
 
 Debe verificarse:
 
-\[
+
+```math
 t_{i+1}>t_i
-\]
+```
+
 
 y detectar huecos:
 
-\[
+
+```math
 t_{i+1}-t_i
 >
 \Delta t_{expected}
-\]
+```
+
 
 ---
 
@@ -1341,19 +1487,23 @@ Esto permite estudiar error según horizonte.
 
 Definimos:
 
-\[
+
+```math
 L
 =
 t_{target}
 -
 t_{forecast}
-\]
+```
+
 
 El error puede analizarse como función:
 
-\[
+
+```math
 MAE(L)
-\]
+```
+
 
 ---
 
@@ -1387,9 +1537,11 @@ más robusta debería intentar abarcar varios meses.
 
 Idealmente:
 
-\[
+
+```math
 T_{exp}\geq1\ \text{año}
-\]
+```
+
 
 para cubrir toda la estacionalidad.
 
@@ -1399,9 +1551,11 @@ para cubrir toda la estacionalidad.
 
 Una primera fase puede utilizar:
 
-\[
+
+```math
 30-60\ \text{días}
-\]
+```
+
 
 si incluye suficiente variabilidad meteorológica.
 
@@ -1451,17 +1605,23 @@ El conjunto final de test no debe utilizarse durante el ajuste del modelo.
 
 Solo al final se calcula:
 
-\[
+
+```math
 MAE_{test}
-\]
+```
 
-\[
+
+
+```math
 RMSE_{test}
-\]
+```
 
-\[
+
+
+```math
 Savings_{test}
-\]
+```
+
 
 ---
 
@@ -1471,25 +1631,31 @@ Además del modelo completo, debe existir una referencia simple.
 
 Por ejemplo:
 
-\[
+
+```math
 P_{FV}^{baseline}
 =
 P_{PVGIS}
-\]
+```
+
 
 sin corrección meteorológica.
 
 Después se compara:
 
-\[
+
+```math
 RMSE_{PVGIS}
-\]
+```
+
 
 con:
 
-\[
+
+```math
 RMSE_{AEMET+PVGIS}
-\]
+```
+
 
 ---
 
@@ -1497,7 +1663,8 @@ RMSE_{AEMET+PVGIS}
 
 Puede definirse:
 
-\[
+
+```math
 Skill
 =
 1
@@ -1507,13 +1674,16 @@ RMSE_{model}
 }{
 RMSE_{baseline}
 }
-\]
+```
+
 
 Si:
 
-\[
+
+```math
 Skill>0
-\]
+```
+
 
 el nuevo modelo mejora el baseline.
 
@@ -1536,17 +1706,23 @@ descargar ante cualquier déficit
 
 La mejora puede medirse mediante:
 
-\[
+
+```math
 \Delta C
-\]
+```
 
-\[
+
+
+```math
 \Delta N_{eq}
-\]
+```
 
-\[
+
+
+```math
 \Delta E_{grid}
-\]
+```
+
 
 respecto a ese baseline.
 
@@ -1570,13 +1746,15 @@ acompañarse de:
 Como las estrategias pueden ejecutarse sobre el mismo día mediante replay,
 puede utilizarse:
 
-\[
+
+```math
 \Delta C_d
 =
 C_{A,d}
 -
 C_{B,d}
-\]
+```
+
 
 día a día.
 
@@ -1623,15 +1801,19 @@ Debe estudiarse específicamente:
 
 Puede realizarse una prueba perturbando:
 
-\[
+
+```math
 G(t)
-\]
+```
+
 
 y:
 
-\[
+
+```math
 T(t)
-\]
+```
+
 
 para estudiar sensibilidad.
 
@@ -1641,29 +1823,37 @@ para estudiar sensibilidad.
 
 Por ejemplo:
 
-\[
+
+```math
 G' = G(1+\delta_G)
-\]
+```
+
 
 con:
 
-\[
+
+```math
 \delta_G
 =
 \pm5\%,
 \pm10\%,
 \pm20\%
-\]
+```
+
 
 y observar:
 
-\[
-\Delta C
-\]
 
-\[
+```math
+\Delta C
+```
+
+
+
+```math
 \Delta SOC
-\]
+```
+
 
 ---
 
@@ -1671,21 +1861,27 @@ y observar:
 
 También puede variarse:
 
-\[
+
+```math
 c_{deg}
-\]
+```
+
 
 para observar cómo cambia:
 
-\[
+
+```math
 N_{eq}
-\]
+```
+
 
 y:
 
-\[
+
+```math
 C_{net}
-\]
+```
+
 
 ---
 
@@ -1693,15 +1889,19 @@ C_{net}
 
 Puede obtenerse una relación entre:
 
-\[
+
+```math
 \text{coste económico}
-\]
+```
+
 
 y:
 
-\[
+
+```math
 \text{ciclado de batería}
-\]
+```
+
 
 produciendo una frontera de Pareto.
 
@@ -1713,19 +1913,23 @@ Esto sería especialmente interesante científicamente.
 
 Podría definirse:
 
-\[
+
+```math
 J^\*
 =
 C_{net}
 +
 \lambda N_{eq}
-\]
+```
+
 
 para diferentes valores de:
 
-\[
+
+```math
 \lambda
-\]
+```
+
 
 ---
 
@@ -1794,27 +1998,33 @@ alarmas BMS
 
 La estrategia sostenible podría considerarse mejor si:
 
-\[
+
+```math
 C_{strategy}
 \leq
 C_{reference}
 +
 \epsilon
-\]
+```
+
 
 y simultáneamente:
 
-\[
+
+```math
 N_{eq,strategy}
 <
 N_{eq,reference}
-\]
+```
+
 
 con:
 
-\[
+
+```math
 \epsilon
-\]
+```
+
 
 pequeño.
 
@@ -1825,9 +2035,11 @@ relevante.
 
 # 88. Hipótesis H1
 
-\[
+
+```math
 H_1:
-\]
+```
+
 
 La incorporación de predicción meteorológica horaria reduce el error de
 producción FV respecto a un modelo climatológico sin predicción.
@@ -1836,9 +2048,11 @@ producción FV respecto a un modelo climatológico sin predicción.
 
 # 89. Hipótesis H2
 
-\[
+
+```math
 H_2:
-\]
+```
+
 
 La planificación de cargas flexibles incrementa el autoconsumo directo.
 
@@ -1846,9 +2060,11 @@ La planificación de cargas flexibles incrementa el autoconsumo directo.
 
 # 90. Hipótesis H3
 
-\[
+
+```math
 H_3:
-\]
+```
+
 
 La estrategia sostenible predictiva reduce los ciclos equivalentes de batería
 frente a una estrategia de autoconsumo convencional.
@@ -1857,9 +2073,11 @@ frente a una estrategia de autoconsumo convencional.
 
 # 91. Hipótesis H4
 
-\[
+
+```math
 H_4:
-\]
+```
+
 
 La reducción de ciclado puede obtenerse sin aumentar significativamente el
 coste energético total.
@@ -1868,9 +2086,11 @@ coste energético total.
 
 # 92. Hipótesis H5
 
-\[
+
+```math
 H_5:
-\]
+```
+
 
 La combinación de planificación térmica y producción FV reduce la energía
 extraída de batería durante periodos de climatización.
@@ -2017,15 +2237,18 @@ podrá definirse qué error resulta aceptable.
 
 La validación pretende responder experimentalmente a la pregunta:
 
-\[
+
+```math
 \boxed{
 \text{¿Aporta realmente valor la gestión predictiva?}
 }
-\]
+```
+
 
 Ese valor debe demostrarse en términos de:
 
-\[
+
+```math
 \boxed{
 \text{predicción}
 +
@@ -2037,7 +2260,8 @@ Ese valor debe demostrarse en términos de:
 +
 \text{confort}
 }
-\]
+```
+
 
 y no únicamente mediante una simulación teórica.
 

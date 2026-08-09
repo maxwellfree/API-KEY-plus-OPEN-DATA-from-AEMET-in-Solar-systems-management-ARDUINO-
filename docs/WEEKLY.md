@@ -34,22 +34,26 @@ La planificación semanal utiliza:
 
 El horizonte básico es:
 
-\[
+
+```math
 H = 7\ \text{días}
-\]
+```
+
 
 La planificación no considera todos los días con la misma precisión.
 
 Se utiliza un enfoque multirresolución:
 
-\[
+
+```math
 \text{predicción}(t)
 =
 \begin{cases}
 \text{AEMET horario}, & t \lesssim 48\ \text{h}\\[4pt]
 \text{AEMET diario}, & t > 48\ \text{h}
 \end{cases}
-\]
+```
+
 
 La idea es utilizar la máxima resolución disponible sin atribuir precisión
 horaria a predicciones meteorológicas lejanas.
@@ -100,21 +104,27 @@ Ejemplos:
 
 La variable principal es el instante de inicio:
 
-\[
+
+```math
 t_i
-\]
+```
+
 
 y la tarea ocupa una duración:
 
-\[
+
+```math
 \tau_i
-\]
+```
+
 
 por lo que:
 
-\[
+
+```math
 [t_i,\ t_i+\tau_i]
-\]
+```
+
 
 debe permanecer dentro de una ventana admisible.
 
@@ -197,23 +207,29 @@ El ejemplo principal son los hornos solares.
 
 Cuando el índice solar es suficientemente elevado:
 
-\[
+
+```math
 S_d \geq S_{min}
-\]
+```
+
 
 se propone una ventana de utilización.
 
 Esto no genera electricidad:
 
-\[
+
+```math
 P_{FV}
-\]
+```
+
 
 sino que reduce:
 
-\[
+
+```math
 P_D
-\]
+```
+
 
 ---
 
@@ -221,9 +237,11 @@ P_D
 
 Para cada día se utiliza un indicador:
 
-\[
+
+```math
 S_d \in [0,1]
-\]
+```
+
 
 que resume las condiciones meteorológicas relevantes para la disponibilidad
 solar.
@@ -243,7 +261,7 @@ Su función en `weekly.py` es principalmente comparar días entre sí.
 
 # 9. Clasificación cualitativa del día
 
-A partir de \(S_d\), el sistema puede generar categorías como:
+A partir de $S_d$, el sistema puede generar categorías como:
 
 ```text
 excelente
@@ -258,32 +276,40 @@ Esto facilita la interpretación humana del plan semanal.
 
 # 10. Tareas desplazables
 
-Para una tarea \(i\), se busca una ventana compatible con:
+Para una tarea $i$, se busca una ventana compatible con:
 
-\[
+
+```math
 W_i
 =
 [t_{min,i},t_{max,i}]
-\]
+```
+
 
 y con duración:
 
-\[
+
+```math
 \tau_i
-\]
+```
+
 
 La tarea debe satisfacer:
 
-\[
+
+```math
 t_i \geq t_{min,i}
-\]
+```
+
 
 y:
 
-\[
+
+```math
 t_i+\tau_i
 \leq t_{max,i}
-\]
+```
+
 
 ---
 
@@ -293,21 +319,25 @@ Algunas cargas requieren presencia física.
 
 Si:
 
-\[
+
+```math
 P_{user}(t)=0
-\]
+```
+
 
 la tarea no puede asignarse a ese intervalo.
 
 Por tanto, la ventana efectiva es:
 
-\[
+
+```math
 W_i^{eff}
 =
 W_i
 \cap
 W_{presence}
-\]
+```
+
 
 Esto es especialmente relevante para:
 
@@ -324,9 +354,11 @@ No todas las tareas deben ejecutarse todos los días.
 
 Puede existir una frecuencia:
 
-\[
+
+```math
 f_i
-\]
+```
+
 
 por ejemplo:
 
@@ -346,21 +378,25 @@ simultáneamente.
 
 Se controla:
 
-\[
+
+```math
 P_{tasks}(t)
 =
 \sum_i P_i(t)
-\]
+```
+
 
 para evitar picos innecesarios.
 
 Una condición general sería:
 
-\[
+
+```math
 P_{tasks}(t)
 \leq
 P_{flex,max}
-\]
+```
+
 
 ---
 
@@ -368,13 +404,16 @@ P_{flex,max}
 
 Conceptualmente, cada posible ventana puede recibir una puntuación:
 
-\[
+
+```math
 Q_i(d,t)
-\]
+```
+
 
 dependiente de:
 
-\[
+
+```math
 Q_i
 =
 f
@@ -386,11 +425,13 @@ presencia,
 simultaneidad,
 confianza
 \right)
-\]
+```
+
 
 Una forma genérica sería:
 
-\[
+
+```math
 Q_i
 =
 w_s Q_{solar}
@@ -400,7 +441,8 @@ w_p Q_{precio}
 w_u Q_{usuario}
 -
 w_c Q_{concurrencia}
-\]
+```
+
 
 La versión actual puede implementar esta lógica mediante reglas discretas en
 lugar de una función objetivo continua.
@@ -413,30 +455,36 @@ Para refrigeración, la planificación utiliza la temperatura exterior prevista.
 
 En el horizonte próximo:
 
-\[
+
+```math
 T = T(h)
-\]
+```
+
 
 con resolución horaria.
 
 Para días posteriores:
 
-\[
+
+```math
 T \approx T_{max}
-\]
+```
+
 
 La lógica conceptual es:
 
-\[
+
+```math
 u_{cool}(h)
 =
 \begin{cases}
 1, & T(h)\geq T_{on}\\
 0, & T(h)<T_{on}
 \end{cases}
-\]
+```
 
-donde \(u_{cool}\) representa la recomendación de climatizar.
+
+donde $u_{cool}$ representa la recomendación de climatizar.
 
 ---
 
@@ -507,9 +555,11 @@ Si AEMET predice:
 
 y:
 
-\[
+
+```math
 T_{on}=30^\circ C
-\]
+```
+
 
 las horas activas son:
 
@@ -549,17 +599,21 @@ intensidad térmica esperada.
 
 Para calefacción, la variable más representativa es:
 
-\[
+
+```math
 T_{min}
-\]
+```
+
 
 especialmente para decidir la necesidad térmica de primera hora.
 
 Cuando existe predicción horaria:
 
-\[
+
+```math
 T=T(h)
-\]
+```
+
 
 y pueden analizarse ventanas específicas:
 
@@ -577,20 +631,24 @@ tarde
 
 Conceptualmente:
 
-\[
+
+```math
 u_{heat}(h)
 =
 \begin{cases}
 1,&T(h)\leq T_{heat}\\
 0,&T(h)>T_{heat}
 \end{cases}
-\]
+```
+
 
 El valor inicial utilizado puede ser, por ejemplo:
 
-\[
+
+```math
 T_{heat}\approx12^\circ C
-\]
+```
+
 
 como criterio exterior aproximado.
 
@@ -602,14 +660,16 @@ Este parámetro deberá calibrarse experimentalmente.
 
 Para días sin información horaria suficientemente detallada:
 
-- en verano se utiliza principalmente \(T_{max}\);
-- en invierno se utiliza preferentemente \(T_{min}\).
+- en verano se utiliza principalmente $T_{max}$;
+- en invierno se utiliza preferentemente $T_{min}$.
 
-Si \(T_{min}\) no está disponible, puede utilizarse temporalmente:
+Si $T_{min}$ no está disponible, puede utilizarse temporalmente:
 
-\[
+
+```math
 T_{max}
-\]
+```
+
 
 como indicador de respaldo.
 
@@ -642,13 +702,15 @@ ventana estimada mediante una máxima diaria de dentro de varios días.
 
 La lógica de la versión 4 puede resumirse como:
 
-\[
+
+```math
 \boxed{
 \text{Alta resolución cerca}
 +
 \text{baja resolución lejos}
 }
-\]
+```
+
 
 Esto permite mantener un horizonte largo sin fingir una precisión inexistente.
 
@@ -660,15 +722,19 @@ El ACS se planifica separadamente de la climatización.
 
 Se intenta aprovechar primero:
 
-\[
+
+```math
 E_{solar,thermal}
-\]
+```
+
 
 antes que:
 
-\[
+
+```math
 E_{electric}
-\]
+```
+
 
 La recomendación depende del recurso solar del día.
 
@@ -678,9 +744,11 @@ La recomendación depende del recurso solar del día.
 
 Si:
 
-\[
+
+```math
 S_d
-\]
+```
+
 
 es elevado, el sistema recomienda:
 
@@ -691,9 +759,11 @@ y bomba de intercambio.
 
 El termo eléctrico solo debería intervenir si:
 
-\[
+
+```math
 T_{ACS}<T_{min,ACS}
-\]
+```
+
 
 ---
 
@@ -735,15 +805,19 @@ Esto ilustra una característica importante:
 
 En futuras versiones puede introducirse una regla:
 
-\[
+
+```math
 P_{rain}(d) > P_{threshold}
-\]
+```
+
 
 o:
 
-\[
+
+```math
 R_d > R_{min}
-\]
+```
+
 
 para cancelar o reducir el riego previsto.
 
@@ -753,9 +827,11 @@ para cancelar o reducir el riego previsto.
 
 Cuando:
 
-\[
+
+```math
 S_d \geq S_{solar\_oven}
-\]
+```
+
 
 se propone una ventana como:
 
@@ -786,13 +862,15 @@ entonces el perfil de demanda debe modificarse.
 
 Formalmente:
 
-\[
+
+```math
 P_D^{new}(t)
 =
 P_D^{base}(t)
 +
 P_{washer}(t)
-\]
+```
+
 
 ---
 
@@ -831,11 +909,13 @@ Una evolución más avanzada podría hacer:
 
 Matemáticamente:
 
-\[
+
+```math
 Q^{(k+1)}
 =
 F(Q^{(k)})
-\]
+```
+
 
 hasta alcanzar una solución suficientemente estable.
 
@@ -847,9 +927,11 @@ Las ventanas admisibles deben ser configurables.
 
 El usuario puede proporcionar:
 
-\[
+
+```math
 W_{home}(d)
-\]
+```
+
 
 que representa cuándo se encuentra en casa.
 
@@ -876,15 +958,19 @@ Las cargas automatizables pueden ejecutarse sin intervención directa.
 
 Esto permite diferenciar:
 
-\[
+
+```math
 W_i^{auto}
-\]
+```
+
 
 de:
 
-\[
+
+```math
 W_i^{presence}
-\]
+```
+
 
 ---
 
@@ -966,15 +1052,19 @@ Un plan semanal no debe considerarse definitivo.
 
 Cada día:
 
-\[
+
+```math
 Forecast_{new}
-\]
+```
+
 
 sustituye a:
 
-\[
+
+```math
 Forecast_{old}
-\]
+```
+
 
 por lo que el plan puede recalcularse.
 
@@ -996,11 +1086,13 @@ recalcular plan
 
 Si una previsión cambia significativamente:
 
-\[
+
+```math
 |S_d^{new}-S_d^{old}|
 >
 \Delta S_{threshold}
-\]
+```
+
 
 puede ser conveniente recalcular automáticamente las tareas flexibles.
 
@@ -1012,11 +1104,13 @@ La climatización es especialmente sensible a cambios de temperatura.
 
 Si:
 
-\[
+
+```math
 T^{new}(h)
 \neq
 T^{old}(h)
-\]
+```
+
 
 la ventana térmica debe recalcularse.
 
@@ -1030,23 +1124,29 @@ Las predicciones meteorológicas contienen incertidumbre.
 
 Por ello, la planificación debería evolucionar hacia:
 
-\[
+
+```math
 P(T_h)
-\]
+```
+
 
 y:
 
-\[
+
+```math
 P(G_h)
-\]
+```
+
 
 en lugar de utilizar únicamente valores deterministas.
 
 Una futura función objetivo podría incluir:
 
-\[
+
+```math
 E[J]
-\]
+```
+
 
 o penalizaciones de riesgo.
 
@@ -1059,15 +1159,17 @@ que solo resulta viable bajo una predicción muy optimista.
 
 Conceptualmente:
 
-\[
+
+```math
 Q_{robust}
 =
 Q
 -
 \lambda \sigma
-\]
+```
 
-donde \(\sigma\) representa incertidumbre.
+
+donde $\sigma$ representa incertidumbre.
 
 ---
 
@@ -1077,13 +1179,16 @@ La versión actual utiliza temperatura exterior como variable de decisión.
 
 Una formulación más física deberá incluir un estado interior:
 
-\[
+
+```math
 T_{in}(t)
-\]
+```
+
 
 con una ecuación simplificada tipo RC:
 
-\[
+
+```math
 C
 \frac{dT_{in}}{dt}
 =
@@ -1096,13 +1201,14 @@ Q_{solar}
 Q_{internal}
 +
 Q_{HVAC}
-\]
+```
+
 
 donde:
 
-- \(R\) representa resistencia térmica efectiva;
-- \(C\) capacidad térmica;
-- \(Q_{HVAC}\) aporte térmico de climatización.
+- $R$ representa resistencia térmica efectiva;
+- $C$ capacidad térmica;
+- $Q_{HVAC}$ aporte térmico de climatización.
 
 ---
 
@@ -1110,9 +1216,11 @@ donde:
 
 Con un modelo térmico puede decidirse:
 
-\[
+
+```math
 T_{in}(t)<T_{set}
-\]
+```
+
 
 durante horas de exceso FV para reducir consumo posterior.
 
@@ -1125,12 +1233,14 @@ edificio.
 
 El acumulador de agua puede modelarse mediante:
 
-\[
+
+```math
 E_{ACS}
 =
 m c_p
 (T_{ACS}-T_{ref})
-\]
+```
+
 
 Esto permitiría comparar directamente:
 
@@ -1152,19 +1262,23 @@ durante horas de excedente.
 
 El problema completo puede representarse mediante:
 
-\[
+
+```math
 \max
 \sum_{d,t,i}
 Q_i(d,t)x_i(d,t)
-\]
+```
+
 
 sujeto a:
 
-\[
-\sum_{d,t}x_i(d,t)=f_i
-\]
 
-para cada tarea \(i\),
+```math
+\sum_{d,t}x_i(d,t)=f_i
+```
+
+
+para cada tarea $i$,
 
 junto con restricciones de:
 
@@ -1181,19 +1295,23 @@ junto con restricciones de:
 
 Para tareas discretas puede utilizarse:
 
-\[
+
+```math
 x_{i,d,t}
 \in
 \{0,1\}
-\]
+```
+
 
 donde:
 
-\[
-x_{i,d,t}=1
-\]
 
-significa que la tarea \(i\) comienza en el día \(d\) a la hora \(t\).
+```math
+x_{i,d,t}=1
+```
+
+
+significa que la tarea $i$ comienza en el día $d$ a la hora $t$.
 
 Esto permitiría transformar `weekly.py` en un problema de programación entera.
 
@@ -1210,9 +1328,11 @@ La evolución natural puede utilizar:
 
 Especialmente:
 
-\[
+
+```math
 MILP
-\]
+```
+
 
 es adecuado para representar tareas discretas con horarios.
 
@@ -1265,16 +1385,19 @@ y medir:
 
 Puede definirse:
 
-\[
+
+```math
 E_{shift}
 =
 \sum_i
 E_i^{moved}
-\]
+```
+
 
 y el porcentaje:
 
-\[
+
+```math
 R_{shift}
 =
 \frac{
@@ -1282,7 +1405,8 @@ E_{shift}
 }{
 E_{flex,total}
 }
-\]
+```
+
 
 ---
 
@@ -1290,25 +1414,31 @@ E_{flex,total}
 
 Una métrica interesante es comparar:
 
-\[
+
+```math
 C_{fixed}
-\]
+```
+
 
 con:
 
-\[
+
+```math
 C_{flex}
-\]
+```
+
 
 y definir:
 
-\[
+
+```math
 \Delta C_{flex}
 =
 C_{fixed}
 -
 C_{flex}
-\]
+```
+
 
 ---
 
@@ -1316,13 +1446,15 @@ C_{flex}
 
 También:
 
-\[
+
+```math
 \Delta E_{auto}
 =
 E_{auto}^{flex}
 -
 E_{auto}^{fixed}
-\]
+```
+
 
 Esto permitirá medir científicamente el valor de la planificación doméstica.
 
@@ -1334,10 +1466,12 @@ Una buena planificación semanal puede reducir la necesidad de almacenamiento.
 
 Si una carga puede trasladarse desde la noche al mediodía:
 
-\[
+
+```math
 E_{battery}
 \downarrow
-\]
+```
+
 
 sin reducir el servicio prestado.
 
@@ -1417,7 +1551,8 @@ Los siguientes desarrollos naturales son:
 
 El objetivo de `weekly.py` es transformar:
 
-\[
+
+```math
 \boxed{
 \text{meteorología}
 +
@@ -1427,15 +1562,18 @@ El objetivo de `weekly.py` es transformar:
 +
 \text{necesidades domésticas}
 }
-\]
+```
+
 
 en:
 
-\[
+
+```math
 \boxed{
 \text{un calendario energético útil para el usuario}
 }
-\]
+```
+
 
 y utilizar posteriormente ese calendario para construir una demanda eléctrica
 más inteligente que pueda ser optimizada por `dispatch.py`.

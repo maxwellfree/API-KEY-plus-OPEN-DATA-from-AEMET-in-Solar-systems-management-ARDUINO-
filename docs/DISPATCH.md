@@ -27,49 +27,63 @@ A partir de estos datos decide cómo repartir la energía entre:
 
 # 1. Variables principales
 
-Para cada intervalo horario \(h\) se utilizan las siguientes variables:
+Para cada intervalo horario $h$ se utilizan las siguientes variables:
 
-\[
+
+```math
 P_{FV,h}
-\]
+```
+
 
 potencia fotovoltaica disponible,
 
-\[
+
+```math
 P_{D,h}
-\]
+```
+
 
 demanda doméstica,
 
-\[
+
+```math
 P_{ch,h}
-\]
+```
+
 
 potencia de carga de batería,
 
-\[
+
+```math
 P_{dis,h}
-\]
+```
+
 
 potencia de descarga,
 
-\[
+
+```math
 P_{grid,h}^{buy}
-\]
+```
+
 
 potencia importada de red,
 
-\[
+
+```math
 P_{grid,h}^{sell}
-\]
+```
+
 
 potencia exportada.
 
 El estado de carga de batería se representa mediante:
 
-\[
+
+```math
 SOC_h
-\]
+```
+
 
 ---
 
@@ -77,7 +91,8 @@ SOC_h
 
 En cada hora debe cumplirse aproximadamente:
 
-\[
+
+```math
 P_{FV,h}
 +
 P_{grid,h}^{buy}
@@ -89,7 +104,8 @@ P_{D,h}
 P_{ch,h}
 +
 P_{grid,h}^{sell}
-\]
+```
+
 
 Esta ecuación constituye la restricción fundamental del despacho.
 
@@ -99,45 +115,55 @@ Esta ecuación constituye la restricción fundamental del despacho.
 
 Antes de decidir el uso del almacenamiento se calcula:
 
-\[
+
+```math
 B_h
 =
 P_{FV,h}
 -
 P_{D,h}
-\]
+```
+
 
 Si:
 
-\[
+
+```math
 B_h>0
-\]
+```
+
 
 existe excedente fotovoltaico.
 
 Si:
 
-\[
+
+```math
 B_h<0
-\]
+```
+
 
 existe déficit.
 
 Se definen:
 
-\[
+
+```math
 P_{exc,h}
 =
 \max(B_h,0)
-\]
+```
+
 
 y:
 
-\[
+
+```math
 P_{def,h}
 =
 \max(-B_h,0)
-\]
+```
+
 
 ---
 
@@ -146,7 +172,8 @@ P_{def,h}
 La primera utilización de la producción FV es satisfacer directamente la
 demanda.
 
-\[
+
+```math
 P_{auto,h}
 =
 \min
@@ -154,7 +181,8 @@ P_{auto,h}
 P_{FV,h},
 P_{D,h}
 \right)
-\]
+```
+
 
 El autoconsumo directo evita:
 
@@ -171,20 +199,23 @@ Por ello constituye la primera prioridad energética.
 
 El estado de carga se define como:
 
-\[
+
+```math
 SOC_h
 =
 \frac{E_{bat,h}}{E_{nom}}
-\]
+```
+
 
 donde:
 
-- \(E_{bat,h}\) es la energía almacenada;
-- \(E_{nom}\) es la capacidad nominal.
+- $E_{bat,h}$ es la energía almacenada;
+- $E_{nom}$ es la capacidad nominal.
 
 La actualización puede expresarse como:
 
-\[
+
+```math
 SOC_{h+1}
 =
 SOC_h
@@ -200,12 +231,13 @@ E_{dis,h}
 }{
 \eta_d E_{nom}
 }
-\]
+```
+
 
 donde:
 
-- \(\eta_c\) es la eficiencia de carga;
-- \(\eta_d\) es la eficiencia de descarga.
+- $\eta_c$ es la eficiencia de carga;
+- $\eta_d$ es la eficiencia de descarga.
 
 ---
 
@@ -215,13 +247,15 @@ La batería no debe operar libremente entre 0 y 100 %.
 
 Se define una ventana:
 
-\[
+
+```math
 SOC_{min}
 \leq
 SOC_h
 \leq
 SOC_{max}
-\]
+```
+
 
 En la instalación de referencia:
 
@@ -241,16 +275,19 @@ porque exista un déficit puntual.
 
 Se introduce un SOC objetivo:
 
-\[
+
+```math
 SOC_h^{obj}
-\]
+```
+
 
 que representa la cantidad de energía que conviene conservar teniendo en
 cuenta las horas futuras.
 
 Conceptualmente:
 
-\[
+
+```math
 SOC_h^{obj}
 =
 f
@@ -261,23 +298,28 @@ p_{buy}^{future},
 SOC_{min},
 SOC_{max}
 \right)
-\]
+```
+
 
 Si se espera fuerte producción FV unas horas más tarde:
 
-\[
+
+```math
 SOC_h^{obj}
 \downarrow
-\]
+```
+
 
 porque la batería podrá recargarse posteriormente.
 
 Si se espera baja producción:
 
-\[
+
+```math
 SOC_h^{obj}
 \uparrow
-\]
+```
+
 
 para conservar reserva.
 
@@ -287,31 +329,39 @@ para conservar reserva.
 
 Cuando:
 
-\[
+
+```math
 P_{D,h}>P_{FV,h}
-\]
+```
+
 
 el déficit es:
 
-\[
+
+```math
 P_{def,h}
 =
 P_{D,h}
 -
 P_{FV,h}
-\]
+```
+
 
 El sistema debe decidir entre:
 
-\[
+
+```math
 \text{batería}
-\]
+```
+
 
 y:
 
-\[
+
+```math
 \text{red}
-\]
+```
+
 
 o una combinación de ambas.
 
@@ -323,27 +373,31 @@ La energía disponible para descargar depende del SOC actual.
 
 Si:
 
-\[
+
+```math
 SOC_h > SOC_{min}
-\]
+```
+
 
 existe margen energético.
 
 Puede definirse:
 
-\[
+
+```math
 E_{available,h}
 =
 E_{nom}
 \left(
 SOC_h-SOC_{min}
 \right)
-\]
+```
+
 
 No toda esta energía debe necesariamente utilizarse.
 
 La estrategia puede conservar una reserva adicional asociada a
-\(SOC_h^{obj}\).
+$SOC_h^{obj}$.
 
 ---
 
@@ -351,7 +405,8 @@ La estrategia puede conservar una reserva adicional asociada a
 
 Una aproximación conceptual es:
 
-\[
+
+```math
 P_{dis,h}
 =
 \min
@@ -360,7 +415,8 @@ P_{def,h},
 P_{dis,max},
 P_{available,h}
 \right]
-\]
+```
+
 
 pero solamente cuando exista justificación suficiente.
 
@@ -380,24 +436,28 @@ La filosofía sostenible introduce una penalización implícita al ciclado.
 
 Puede representarse mediante:
 
-\[
+
+```math
 C_{deg,h}
 =
 c_{deg}
 E_{throughput,h}
-\]
+```
+
 
 donde:
 
-\[
+
+```math
 E_{throughput,h}
 =
 E_{ch,h}
 +
 E_{dis,h}
-\]
+```
 
-y \(c_{deg}\) representa un coste equivalente asociado al desgaste.
+
+y $c_{deg}$ representa un coste equivalente asociado al desgaste.
 
 Aunque el modelo actual puede implementar esta idea mediante reglas y umbrales,
 esta formulación permite expresar matemáticamente la estrategia.
@@ -408,38 +468,46 @@ esta formulación permite expresar matemáticamente la estrategia.
 
 Cuando existe déficit se compara conceptualmente:
 
-\[
+
+```math
 C_{grid,h}
 =
 p_{buy,h}
 E_{def,h}
-\]
+```
+
 
 con:
 
-\[
+
+```math
 C_{battery,h}
 =
 C_{deg,h}
-\]
+```
+
 
 Si:
 
-\[
+
+```math
 C_{grid,h}
 <
 C_{battery,h}
-\]
+```
+
 
 puede resultar preferible comprar energía.
 
 Si:
 
-\[
+
+```math
 C_{grid,h}
 >
 C_{battery,h}
-\]
+```
+
 
 y existe suficiente SOC, puede justificarse la descarga.
 
@@ -453,19 +521,23 @@ Esto conduce a una política:
 
 Cuando:
 
-\[
+
+```math
 P_{FV,h}>P_{D,h}
-\]
+```
+
 
 el excedente es:
 
-\[
+
+```math
 P_{exc,h}
 =
 P_{FV,h}
 -
 P_{D,h}
-\]
+```
+
 
 Este excedente puede:
 
@@ -481,21 +553,26 @@ Este excedente puede:
 
 La potencia de carga está limitada por:
 
-\[
+
+```math
 P_{ch,h}
 \leq
 P_{ch,max}
-\]
+```
+
 
 y por la capacidad disponible:
 
-\[
+
+```math
 SOC_h < SOC_{max}
-\]
+```
+
 
 La energía máxima que puede almacenarse es aproximadamente:
 
-\[
+
+```math
 E_{cap,h}
 =
 E_{nom}
@@ -504,11 +581,13 @@ SOC_{max}
 -
 SOC_h
 \right)
-\]
+```
+
 
 Por tanto:
 
-\[
+
+```math
 P_{ch,h}
 =
 \min
@@ -517,7 +596,8 @@ P_{exc,h},
 P_{ch,max},
 P_{cap,h}
 \right]
-\]
+```
+
 
 ---
 
@@ -532,7 +612,8 @@ Una vez satisfechas:
 
 el excedente restante puede venderse.
 
-\[
+
+```math
 P_{grid,h}^{sell}
 =
 \max
@@ -542,17 +623,20 @@ P_{exc,h}
 P_{ch,h},
 0
 \right]
-\]
+```
+
 
 El ingreso correspondiente es:
 
-\[
+
+```math
 I_h
 =
 P_{grid,h}^{sell}
 p_{sell,h}
 \Delta t
-\]
+```
+
 
 ---
 
@@ -565,19 +649,23 @@ La energía comprada se utiliza cuando:
 - el SOC ha alcanzado el mínimo;
 - se desea preservar energía para horas futuras.
 
-\[
+
+```math
 P_{grid,h}^{buy}
 =
 P_{def,h}
 -
 P_{dis,h}
-\]
+```
+
 
 con:
 
-\[
+
+```math
 P_{grid,h}^{buy}\geq0
-\]
+```
+
 
 ---
 
@@ -585,21 +673,25 @@ P_{grid,h}^{buy}\geq0
 
 En una formulación ideal deben evitarse situaciones como:
 
-\[
+
+```math
 P_{grid}^{buy}>0
 \quad\text{y}\quad
 P_{grid}^{sell}>0
-\]
+```
+
 
 simultáneamente.
 
 También:
 
-\[
+
+```math
 P_{ch}>0
 \quad\text{y}\quad
 P_{dis}>0
-\]
+```
+
 
 salvo condiciones especiales del hardware.
 
@@ -649,17 +741,20 @@ Estas etiquetas permiten interpretar fácilmente el despacho calculado.
 
 La energía total procesada por la batería se calcula como:
 
-\[
+
+```math
 E_{cycled}
 =
 E_{charge}
 +
 E_{discharge}
-\]
+```
+
 
 El número aproximado de ciclos completos equivalentes es:
 
-\[
+
+```math
 N_{eq}
 =
 \frac{
@@ -669,7 +764,8 @@ E_{discharge}
 }{
 2E_{nom}
 }
-\]
+```
+
 
 Esta métrica es especialmente útil para comparar estrategias.
 
@@ -705,33 +801,39 @@ Estas métricas permiten comparar diferentes políticas de operación.
 
 El coste de compra es:
 
-\[
+
+```math
 C_{buy}
 =
 \sum_h
 E_{grid,h}^{buy}
 p_{buy,h}
-\]
+```
+
 
 El ingreso por venta:
 
-\[
+
+```math
 I_{sell}
 =
 \sum_h
 E_{grid,h}^{sell}
 p_{sell,h}
-\]
+```
+
 
 El balance económico neto:
 
-\[
+
+```math
 C_{net}
 =
 C_{buy}
 -
 I_{sell}
-\]
+```
+
 
 Un valor negativo representaría un ingreso neto superior al coste de compra.
 
@@ -741,14 +843,16 @@ Un valor negativo representaría un ingreso neto superior al coste de compra.
 
 Una estrategia puramente económica tendería a resolver:
 
-\[
+
+```math
 \min
 \left[
 C_{buy}
 -
 I_{sell}
 \right]
-\]
+```
+
 
 Sin embargo, esta función objetivo ignora la degradación de batería.
 
@@ -765,7 +869,8 @@ Por ello podría producir:
 
 Una formulación más completa es:
 
-\[
+
+```math
 J
 =
 C_{buy}
@@ -777,13 +882,14 @@ C_{deg}
 P_{SOC}
 +
 P_{comfort}
-\]
+```
+
 
 donde:
 
-- \(C_{deg}\) penaliza el desgaste de batería;
-- \(P_{SOC}\) penaliza desviaciones del rango deseado;
-- \(P_{comfort}\) representa restricciones domésticas.
+- $C_{deg}$ penaliza el desgaste de batería;
+- $P_{SOC}$ penaliza desviaciones del rango deseado;
+- $P_{comfort}$ representa restricciones domésticas.
 
 El algoritmo actual implementa esta filosofía mediante reglas predictivas y
 SOC objetivo.
@@ -796,15 +902,19 @@ El despacho no debe considerar cada hora de forma completamente aislada.
 
 Supongamos que a las 08:00 existe un déficit de:
 
-\[
+
+```math
 0.4\ \mathrm{kWh}
-\]
+```
+
 
 pero a partir de las 09:00 se espera:
 
-\[
+
+```math
 P_{FV} \gg P_D
-\]
+```
+
 
 La batería puede utilizarse parcialmente sabiendo que será recargada poco
 después.
@@ -820,23 +930,28 @@ El despacho actualmente se calcula con resolución horaria.
 
 Para un horizonte:
 
-\[
+
+```math
 H=24
-\]
+```
+
 
 puede definirse:
 
-\[
+
+```math
 \mathbf{u}
 =
 [
 u_0,u_1,\ldots,u_{23}
 ]
-\]
+```
 
-donde cada \(u_h\) contiene las decisiones de:
 
-\[
+donde cada $u_h$ contiene las decisiones de:
+
+
+```math
 u_h
 =
 \{
@@ -845,13 +960,16 @@ P_{dis},
 P_{buy},
 P_{sell}
 \}
-\]
+```
+
 
 Una evolución futura consistirá en extender este horizonte a:
 
-\[
+
+```math
 48-96\ \mathrm{h}
-\]
+```
+
 
 ---
 
@@ -899,11 +1017,13 @@ hasta:
 
 entonces el perfil de demanda cambia:
 
-\[
+
+```math
 P_D^{new}(h)
 \neq
 P_D^{old}(h)
-\]
+```
+
 
 El despacho debe recalcularse con el nuevo perfil.
 
@@ -929,9 +1049,11 @@ La climatización también modifica el despacho.
 
 Si AEMET determina que el aire acondicionado debe funcionar:
 
-\[
+
+```math
 12:00-18:00
-\]
+```
+
 
 la demanda térmica debe añadirse al perfil eléctrico durante esa ventana.
 
@@ -952,9 +1074,11 @@ pero aumentar:
 
 En edificios con buena inercia térmica puede resultar conveniente:
 
-\[
+
+```math
 P_{cool}(t)>0
-\]
+```
+
 
 durante horas de alta producción FV incluso antes del máximo de temperatura
 interior.
@@ -963,15 +1087,19 @@ Esto convierte al edificio en una forma de almacenamiento térmico.
 
 Una estrategia futura podría comparar:
 
-\[
+
+```math
 \text{cargar batería}
-\]
+```
+
 
 frente a:
 
-\[
+
+```math
 \text{preenfriar edificio}
-\]
+```
+
 
 ---
 
@@ -979,27 +1107,37 @@ frente a:
 
 Además del SOC deben respetarse límites como:
 
-\[
+
+```math
 P_{ch}\leq P_{ch,max}
-\]
+```
 
-\[
+
+
+```math
 P_{dis}\leq P_{dis,max}
-\]
+```
 
-\[
+
+
+```math
 P_{grid}^{buy}\leq P_{grid,max}
-\]
+```
 
-\[
+
+
+```math
 P_{grid}^{sell}\leq P_{export,max}
-\]
+```
+
 
 y:
 
-\[
+
+```math
 P_{AC}\leq P_{inverter,max}
-\]
+```
+
 
 Estas restricciones deberán corresponder siempre con los límites reales del
 hardware.
@@ -1057,29 +1195,34 @@ mantener configuración segura del inversor
 La formulación futura puede expresarse como un problema de Model Predictive
 Control.
 
-En cada instante \(k\):
+En cada instante $k$:
 
-\[
+
+```math
 \mathbf{u}^*
 =
 \arg\min_{\mathbf{u}}
 J
-\]
+```
+
 
 sujeto a:
 
-\[
+
+```math
 \mathbf{x}_{k+1}
 =
 f(
 \mathbf{x}_k,
 \mathbf{u}_k
 )
-\]
+```
+
 
 donde el estado puede incluir:
 
-\[
+
+```math
 \mathbf{x}
 =
 [
@@ -1088,11 +1231,13 @@ T_{interior},
 T_{ACS},
 \ldots
 ]
-\]
+```
+
 
 y las acciones:
 
-\[
+
+```math
 \mathbf{u}
 =
 [
@@ -1102,7 +1247,8 @@ P_{grid},
 P_{HVAC},
 \ldots
 ]
-\]
+```
+
 
 ---
 
@@ -1146,21 +1292,25 @@ sin predicción.
 
 Minimiza:
 
-\[
+
+```math
 C_{buy}-I_{sell}
-\]
+```
+
 
 ## Estrategia C — sostenible predictiva
 
 Minimiza aproximadamente:
 
-\[
+
+```math
 C_{buy}
 -
 I_{sell}
 +
 C_{deg}
-\]
+```
+
 
 manteniendo además restricciones domésticas.
 
@@ -1170,39 +1320,51 @@ manteniendo además restricciones domésticas.
 
 Las tres estrategias deberían compararse mediante:
 
-\[
+
+```math
 C_{net}
-\]
+```
+
 
 coste económico,
 
-\[
+
+```math
 N_{eq}
-\]
+```
+
 
 ciclos equivalentes,
 
-\[
+
+```math
 E_{grid}^{buy}
-\]
+```
+
 
 energía comprada,
 
-\[
+
+```math
 E_{grid}^{sell}
-\]
+```
+
 
 energía exportada,
 
-\[
+
+```math
 R_{self}
-\]
+```
+
 
 autosuficiencia,
 
-\[
+
+```math
 R_{auto}
-\]
+```
+
 
 autoconsumo.
 
@@ -1253,49 +1415,65 @@ La siguiente evolución consiste en:
 
 Supongamos:
 
-\[
-P_{FV}=3.0\ \mathrm{kW}
-\]
 
-\[
+```math
+P_{FV}=3.0\ \mathrm{kW}
+```
+
+
+
+```math
 P_D=2.0\ \mathrm{kW}
-\]
+```
+
 
 Entonces:
 
-\[
+
+```math
 P_{exc}=1.0\ \mathrm{kW}
-\]
+```
+
 
 Si:
 
-\[
+
+```math
 SOC<SOC^{obj}
-\]
+```
+
 
 puede decidirse:
 
-\[
+
+```math
 P_{ch}=1.0\ \mathrm{kW}
-\]
+```
+
 
 y:
 
-\[
+
+```math
 P_{sell}=0
-\]
+```
+
 
 Si la batería ya se encuentra suficientemente cargada:
 
-\[
+
+```math
 P_{ch}=0
-\]
+```
+
 
 y:
 
-\[
+
+```math
 P_{sell}=1.0\ \mathrm{kW}
-\]
+```
+
 
 ---
 
@@ -1303,40 +1481,54 @@ P_{sell}=1.0\ \mathrm{kW}
 
 Supongamos:
 
-\[
-P_{FV}=0.5\ \mathrm{kW}
-\]
 
-\[
+```math
+P_{FV}=0.5\ \mathrm{kW}
+```
+
+
+
+```math
 P_D=1.5\ \mathrm{kW}
-\]
+```
+
 
 El déficit es:
 
-\[
+
+```math
 P_{def}=1.0\ \mathrm{kW}
-\]
+```
+
 
 Si la batería tiene suficiente SOC pero el precio de compra es muy bajo, puede
 resultar:
 
-\[
-P_{dis}=0
-\]
 
-\[
+```math
+P_{dis}=0
+```
+
+
+
+```math
 P_{buy}=1.0\ \mathrm{kW}
-\]
+```
+
 
 Si el precio es elevado y la batería tiene suficiente margen:
 
-\[
-P_{dis}=1.0\ \mathrm{kW}
-\]
 
-\[
+```math
+P_{dis}=1.0\ \mathrm{kW}
+```
+
+
+
+```math
 P_{buy}=0
-\]
+```
+
 
 Esta decisión es precisamente la que diferencia un sistema predictivo de una
 estrategia de autoconsumo convencional.
@@ -1347,7 +1539,8 @@ estrategia de autoconsumo convencional.
 
 El propósito de `dispatch.py` es transformar:
 
-\[
+
+```math
 \boxed{
 \text{FV}
 +
@@ -1359,15 +1552,18 @@ El propósito de `dispatch.py` es transformar:
 +
 \text{predicción futura}
 }
-\]
+```
+
 
 en:
 
-\[
+
+```math
 \boxed{
 \text{acciones horarias físicamente viables}
 }
-\]
+```
+
 
 minimizando simultáneamente:
 
