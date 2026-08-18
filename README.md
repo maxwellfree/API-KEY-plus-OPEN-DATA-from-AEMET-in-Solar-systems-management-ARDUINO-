@@ -212,12 +212,12 @@ El desarrollo matemático, los algoritmos y el protocolo experimental se mantien
 
 | Documento | Contenido |
 |---|---|
-| 📐 [**MODELen.md**](docs/MODELen.md) | Modelo físico, energético y matemático |
-| 🔋 [**DISPATCHen.md**](docs/DISPATCHen.md) | Batería, SOC, compra, venta y despacho horario |
-| 📅 [**WEEKLYen.md**](docs/WEEKLYen.md) | Planificación semanal, cargas flexibles y gestión térmica |
-| 🧪 [**VALIDATIONen.md**](docs/VALIDATIONen.md) | Metodología de validación experimental |
-| 🏗️ [**ARCHITECTUREen.md**](docs/ARCHITECTUREen.md) | Arquitectura software y evolución hacia control real |
-| ⚙️ [**INSTALLATIONen.md**](docs/INSTALLATIONen.md) | Instalación, APIs, credenciales y puesta en marcha |
+| 📐 [**MODEL.md**](docs/MODEL.md) | Modelo físico, energético y matemático |
+| 🔋 [**DISPATCH.md**](docs/DISPATCH.md) | Batería, SOC, compra, venta y despacho horario |
+| 📅 [**WEEKLY.md**](docs/WEEKLY.md) | Planificación semanal, cargas flexibles y gestión térmica |
+| 🧪 [**VALIDATION.md**](docs/VALIDATION.md) | Metodología de validación experimental |
+| 🏗️ [**ARCHITECTURE.md**](docs/ARCHITECTURE.md) | Arquitectura software y evolución hacia control real |
+| ⚙️ [**INSTALLATION.md**](docs/INSTALLATION.md) | Instalación, APIs, credenciales y puesta en marcha |
 
 ---
 
@@ -600,12 +600,12 @@ Detailed mathematical models, algorithms and experimental-validation procedures 
 
 | Document | Contents |
 |---|---|
-| 📐 [**MODEL.md**](docs/MODEL.md) | Physical, energy and mathematical model |
-| 🔋 [**DISPATCH.md**](docs/DISPATCH.md) | Battery, SOC, grid import/export and hourly dispatch |
-| 📅 [**WEEKLY.md**](docs/WEEKLY.md) | Weekly scheduling, flexible loads and thermal management |
-| 🧪 [**VALIDATION.md**](docs/VALIDATION.md) | Experimental validation methodology |
-| 🏗️ [**ARCHITECTURE.md**](docs/ARCHITECTURE.md) | Software architecture and evolution towards real control |
-| ⚙️ [**INSTALLATION.md**](docs/INSTALLATION.md) | Installation, APIs, credentials and setup |
+| 📐 [**MODELen.md**](docs/MODELen.md) | Physical, energy and mathematical model |
+| 🔋 [**DISPATCHen.md**](docs/DISPATCHen.md) | Battery, SOC, grid import/export and hourly dispatch |
+| 📅 [**WEEKLYen.md**](docs/WEEKLYen.md) | Weekly scheduling, flexible loads and thermal management |
+| 🧪 [**VALIDATIONen.md**](docs/VALIDATIONen.md) | Experimental validation methodology |
+| 🏗️ [**ARCHITECTUREen.md**](docs/ARCHITECTUREen.md) | Software architecture and evolution towards real control |
+| ⚙️ [**INSTALLATIONen.md**](docs/INSTALLATIONen.md) | Installation, APIs, credentials and setup |
 
 ---
 
