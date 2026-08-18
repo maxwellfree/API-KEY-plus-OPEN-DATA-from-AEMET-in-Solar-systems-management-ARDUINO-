@@ -212,12 +212,12 @@ El desarrollo matemático, los algoritmos y el protocolo experimental se mantien
 
 | Documento | Contenido |
 |---|---|
-| 📐 [**MODEL.md**](docs/MODEL.md) | Modelo físico, energético y matemático |
-| 🔋 [**DISPATCH.md**](docs/DISPATCH.md) | Batería, SOC, compra, venta y despacho horario |
-| 📅 [**WEEKLY.md**](docs/WEEKLY.md) | Planificación semanal, cargas flexibles y gestión térmica |
-| 🧪 [**VALIDATION.md**](docs/VALIDATION.md) | Metodología de validación experimental |
-| 🏗️ [**ARCHITECTURE.md**](docs/ARCHITECTURE.md) | Arquitectura software y evolución hacia control real |
-| ⚙️ [**INSTALLATION.md**](docs/INSTALLATION.md) | Instalación, APIs, credenciales y puesta en marcha |
+| 📐 [**MODELen.md**](docs/MODELen.md) | Modelo físico, energético y matemático |
+| 🔋 [**DISPATCHen.md**](docs/DISPATCHen.md) | Batería, SOC, compra, venta y despacho horario |
+| 📅 [**WEEKLYen.md**](docs/WEEKLYen.md) | Planificación semanal, cargas flexibles y gestión térmica |
+| 🧪 [**VALIDATIONen.md**](docs/VALIDATIONen.md) | Metodología de validación experimental |
+| 🏗️ [**ARCHITECTUREen.md**](docs/ARCHITECTUREen.md) | Arquitectura software y evolución hacia control real |
+| ⚙️ [**INSTALLATIONen.md**](docs/INSTALLATIONen.md) | Instalación, APIs, credenciales y puesta en marcha |
 
 ---
 
